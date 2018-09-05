@@ -33,9 +33,14 @@ import static org.junit.Assert.assertNotEquals;
 public class ObjectPoolTest extends BaseTest {
 
 
-
     @Test
-    public void test() throws Exception {
+    public void test1() throws Exception {
+        FastObjectPool<TestObject> pool = new FastObjectPool<>(new DefaultFastObjectFactory<>(TestObject.class));
+        TestObject obj = pool.borrowObject();
+        pool.returnObject(obj);
+    }
+    @Test
+    public void test2() throws Exception {
         final AtomicInteger id = new AtomicInteger(0);
 
         final FastObjectPool<TestObject1> pool = createFastObjectPool(new FastObjectFactoryBase() {
